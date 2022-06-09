@@ -1,20 +1,10 @@
-const { response } = require('express');
 const express = require('express');
 
 const app = express();
 
 app.use(express.json());
 
-const projects = [
-  {
-    "id": "1",
-    "title": "Projeto Um"
-  },
-  {
-    "id": "2",
-    "title": "Projeto Dois"
-  }
-];
+const projects = [];
 
 // GET -> lista todos os projetos
 app.get('/projects', (req, res) => {
@@ -91,6 +81,8 @@ app.delete('/projects/:id/tasks', (req, res) => {
     }else{
       return res.json({ message: 'Esse projeto ainda não possui tasks.'});
     }
+  }else{
+    return res.status(400).json({ message: 'Projeto não encontrado.' });
   }
 });
 
